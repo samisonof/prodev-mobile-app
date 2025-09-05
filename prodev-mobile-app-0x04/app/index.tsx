@@ -1,116 +1,55 @@
-import { Text, View, StyleSheet, Image, ImageBackground, Dimensions, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet, Image, ImageBackground, TouchableOpacity } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
+import { BACKGROUNDIMAGE, HEROLOGO } from "@/constants";
+import { styles as mainStyles } from "@/styles/_mainstyle";
 
 export default function Index() {
   const router = useRouter();
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={mainStyles.container}>
         <ImageBackground
-          source={require("@/assets/images/hero-icon.png")}
-          style={styles.background}
+          source={BACKGROUNDIMAGE}
+          style={StyleSheet.absoluteFillObject} // cover the whole screen
           resizeMode="cover"
-        >
-          <View style={styles.container}>
-            {/* Logo */}
-            <View style={styles.companyLogo}>
-              <Image source={require("@/assets/images/logo.png")} />
-            </View>
+        />
 
-            {/* Text group */}
-            <View style={styles.textGroup}>
-              <Text style={styles.textLarge}>Find your favorite place here</Text>
-              <Text style={styles.textSmall}>The best prices for over 2 </Text>
-              <Text style={styles.textSmall}>million properties worldwide</Text>
-            </View>
+        <View style={mainStyles.logoContainer}>
+          <Image source={HEROLOGO} />
+        </View>
 
-            {/* Buttons */}
-            <View style={{ position: "absolute", bottom: 0, width: "100%" }}>
-              <View style={styles.buttonGroup}>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => router.push("/join")}
-                >
-                  <Text style={{ ...styles.textSmall, color: "black" }}>Join</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  style={styles.transparentButton}
-                  onPress={() => router.push("/signin")}
-                >
-                  <Text style={styles.textSmall}>Sign In</Text>
-                </TouchableOpacity>
-              </View>
-
-              <View style={{ alignItems: "center", paddingVertical: 20 }}>
-                <Text style={{ color: "white" }}>Continue to home</Text>
-              </View>
-            </View>
+        <View style={mainStyles.titleContainer}>
+          <Text style={mainStyles.titleText}>Find your favorite place here</Text>
+          <View style={mainStyles.titleSubTextContainer}>
+            <Text style={mainStyles.titleSubText}>The best prices for over 2</Text>
+            <Text style={mainStyles.titleSubText}>million properties worldwide</Text>
           </View>
-        </ImageBackground>
+        </View>
+
+        <View style={{ position: "absolute", bottom: 40, width: "100%" }}>
+          <View style={mainStyles.buttonGroup}>
+            <TouchableOpacity
+              style={mainStyles.buttonPrimary}
+              onPress={() => router.push("/join")}
+            >
+              <Text style={mainStyles.buttonPrimaryText}>Join</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={mainStyles.buttonSecondary}
+              onPress={() => router.push("/signin")}
+            >
+              <Text style={mainStyles.buttonSecondaryText}>Sign In</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={{ alignItems: "center", paddingVertical: 20 }}>
+            <Text style={{ color: "white" }}>Continue to home</Text>
+          </View>
+        </View>
       </SafeAreaView>
     </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  background: {
-    flex: 1,
-    justifyContent: "center",
-    width: "100%",
-    height: Dimensions.get("window").height,
-  },
-  companyLogo: {
-    width: "100%",
-    alignItems: "center",
-    padding: 20,
-    marginBottom: 50,
-  },
-  textGroup: {
-    alignItems: "center",
-  },
-  textLarge: {
-    color: "white",
-    fontWeight: "800",
-    fontSize: 40,
-    textAlign: "center",
-    marginBottom: 12,
-  },
-  textSmall: {
-    color: "white",
-    fontSize: 18,
-    fontWeight: "200",
-    textAlign: "center",
-  },
-  transparentButton: {
-    borderColor: "white",
-    borderWidth: 2,
-    borderRadius: 40,
-    paddingVertical: 15,
-    paddingHorizontal: 5,
-    alignItems: "center",
-    fontSize: 20,
-    flex: 1,
-  },
-  button: {
-    borderColor: "white",
-    borderWidth: 2,
-    borderRadius: 40,
-    paddingVertical: 15,
-    paddingHorizontal: 5,
-    alignItems: "center",
-    fontSize: 20,
-    backgroundColor: "white",
-    flex: 1,
-  },
-  buttonGroup: {
-    flexDirection: "row",
-    gap: 20,
-    paddingHorizontal: 20,
-  },
-});
