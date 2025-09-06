@@ -9,48 +9,44 @@ export default function Index() {
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={{ flex: 1 }}>
-        {/* Background Image */}
+      <SafeAreaView style={mainStyles.container}>
         <ImageBackground
           source={BACKGROUNDIMAGE}
-          style={StyleSheet.absoluteFillObject}
+          style={StyleSheet.absoluteFillObject} // cover the whole screen
           resizeMode="cover"
         />
 
-        {/* Overlay */}
-        <View style={mainStyles.overlay}>
-          {/* Logo */}
+        <View style={mainStyles.logoContainer}>
           <Image source={HEROLOGO} />
-
-          {/* Title + Subtitle */}
-          <Text style={mainStyles.title}>Find your favorite place here</Text>
-          <Text style={mainStyles.subtitle}>The best prices for over 2</Text>
-          <Text style={mainStyles.subtitle}>million properties worldwide</Text>
         </View>
 
-        {/* Buttons */}
+        <View style={mainStyles.titleContainer}>
+          <Text style={mainStyles.titleText}>Find your favorite place here</Text>
+          <View style={mainStyles.titleSubTextContainer}>
+            <Text style={mainStyles.titleSubText}>The best prices for over 2</Text>
+            <Text style={mainStyles.titleSubText}>million properties worldwide</Text>
+          </View>
+        </View>
+
         <View style={{ position: "absolute", bottom: 40, width: "100%" }}>
           <View style={mainStyles.buttonGroup}>
             <TouchableOpacity
-              style={mainStyles.primaryButton}
+              style={mainStyles.buttonPrimary}
               onPress={() => router.push("/join")}
             >
-              <Text style={mainStyles.primaryButtonText}>Join</Text>
+              <Text style={mainStyles.buttonPrimaryText}>Join</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={mainStyles.secondaryButton}
+              style={mainStyles.buttonSecondary}
               onPress={() => router.push("/signin")}
             >
-              <Text style={mainStyles.secondaryButtonText}>Sign In</Text>
+              <Text style={mainStyles.buttonSecondaryText}>Sign In</Text>
             </TouchableOpacity>
           </View>
 
-          {/* Skip Signin → Go Home */}
           <View style={{ alignItems: "center", paddingVertical: 20 }}>
-            <TouchableOpacity onPress={() => router.replace("/(home)")}>
-              <Text style={{ color: "white" }}>Continue to home</Text>
-            </TouchableOpacity>
+            <Text style={{ color: "white" }}>Continue to home</Text>
           </View>
         </View>
       </SafeAreaView>
